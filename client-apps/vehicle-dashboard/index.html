@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title id="pageTitle">車両ダッシュボード</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/subaru/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/subaru/css/site.css">
+    <link rel="icon" type="image/x-icon" href="/subaru/images/subaru-logo_80h.png" />
+</head>
+
+<body>
+    <div class="navbar-container container-md bg-light">
+        <div class="d-flex">
+            <div class="ms-auto">
+                <select id="language" class="language my-2">
+                    <option value="ja-jp" selected>日本 - 日本語</option>
+                    <option value="en-us">English (US)</option>
+                </select>
+                <input id="languageHdn" type="hidden" name="lang" value="ja-jp" />
+            </div>
+        </div>
+    </div>
+
+    <div id="navbar-container" class="container-md bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <img class="main-logo"></img>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="d-flex ms-md-4" role="search">
+                        <input id="vin" class="form-control me-2" type="search" placeholder="VIN" aria-label="Search">
+                        <input id="vinNumberHdn" type="hidden" name="vin" value="" />
+                        <button id="vinSearch" class="btn btn-outline-success btn-search ml-auto col-auto"
+                            type="submit">検索</button>
+                        <!-- for testing use vin JF2SJADC8GH451027 -->
+                    </div>
+                    <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+                        <li class="nav-item dropdown">
+                            <a id="modelYear" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                車両年式
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">2023</a></li>
+                                <li><a class="dropdown-item" href="#">2022</a></li>
+                                <li><a class="dropdown-item" href="#">2021</a></li>
+                                <li><a class="dropdown-item" href="#">2020</a></li>
+                                <li><a class="dropdown-item" href="#">2019</a></li>
+                                <li><a class="dropdown-item" href="#">2018</a></li>
+                                <li><a class="dropdown-item" href="#">2017</a></li>
+                                <li><a class="dropdown-item" href="#">2016</a></li>
+                                <li><a class="dropdown-item" href="#">2015</a></li>
+                                <li><a class="dropdown-item" href="#">2014</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a id="modelName" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                車種
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Forester</a></li>
+                                <li><a class="dropdown-item" href="#">Impreza</a></li>
+                                <li><a class="dropdown-item" href="#">Outback</a></li>
+                                <li><a class="dropdown-item" href="#">Legacy</a></li>
+                                <li><a class="dropdown-item" href="#">Ascent</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a id="modelTrim" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                トリム
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Touring CVT</a></li>
+                                <li><a class="dropdown-item" href="#">Limited CVT</a></li>
+                                <li><a class="dropdown-item" href="#">Sport CVT</a></li>
+                                <li><a class="dropdown-item" href="#">Premium CVT</a></li>
+                                <li><a class="dropdown-item" href="#">CVT</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <button id="modelSearch" class="btn btn-outline-success btn-search ml-auto disabled"
+                            type="submit">検索</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container-md">
+        <!-- Vehicle info -->
+        <div class="card mt-2">
+            <div id="vehicleInfoTitle" class="card-header font-weight-bold">
+                車両情報
+            </div>
+            <div id="vehicleInfo" class="card-body">
+                <div class="row">
+                    <div style="width:75%">
+                        <p id="no-vin-specified" class="no-vin-specified">VINは見つかりませんでした</p>
+                        <div class="row mb-3">
+                            <div class="col max-width ">
+                                <div id="vinNumber" class="row">
+                                </div>
+                                <div id="engineType" class="row">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id="model" class="row">
+                                </div>
+                                <div id="engineNo" class="row">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id="trim" class="row">
+                                </div>
+                                <div id="transmission" class="row">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id="year" class="row">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:25%">
+                        <div id="img" class="row">
+                            <img src="/subaru/images/unknown_image.png" class="image-fluid" alt="unknown">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex-inline justify-content-around mt-2">
+            <button id="serviceBulletins" type="button" class="btn btn-outline-secondary disabled">サービスニュース</button>
+            <button id="serviceManuals" type="button" class="btn btn-outline-secondary disabled">サービスマニュアル</button>
+            <a id="ownersManual" href="/subaru/content/2016_Subaru_Forester_Owner_Manual.pdf" target="_blank"
+                class="btn btn-outline-secondary">オーナーマニュアル</a>
+            <button id="installationGuides" type="button" class="btn btn-outline-secondary disabled">セットアップガイド</button>
+            <button id="techTips" type="button" class="btn btn-outline-secondary disabled">修理ヒント</button>
+            <button id="serviceHistory" type="button" class="btn btn-outline-secondary disabled">修理履歴</button>
+        </div>
+
+        <!-- DTC -->
+        <div class="card mt-2">
+            <div id="dtcTitle" class="card-header font-weight-bold">
+                DTC
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th id="dtcDate" scope="col">日付</th>
+                                <th id="dtcName" scope="col">参照番号</th>
+                                <th id="dtcNumber" scope="col">対象システム</th>
+                                <th id="dtcTargetUnit" scope="col">マイレージ</th>
+                                <th id="dtcMileage" scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblDtc">
+                            <tr>
+                                <td class="no-vin-specified" colspan="6">VINは見つかりませんでした</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recalls -->
+        <div class="card mt-2">
+            <div id="recalls" class="card-header font-weight-bold">
+                リコール
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th id="recallsServiceCampaign" scope="col">リコール届出</th>
+                                <th id="recallType" scope="col">タイプ</th>
+                                <th id="recallsName" scope="col">名称</th>
+                                <th id="recallsBulletin" scope="col">届出リンク</th>
+                                <th id="recallsNotificationDate" scope="col">発行日付</th>
+                                <th id="recallsResolvedDate" scope="col">解決日付</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblRecall">
+                            <tr>
+                                <td class="no-vin-specified" colspan="7">VINは見つかりませんでした</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ECU -->
+        <div class="card mt-2">
+            <div id="ecu" class="card-header font-weight-bold">
+                リプロ
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th id="ecuName" scope="col">名称</th>
+                                <th id="ecuDescription" scope="col">説明</th>
+                                <th id="ecuCurrentSoftwareVersion" scope="col">現在ソフトバージョン</th>
+                                <th id="ecuCurrentReleaseDate" scope="col">リリース日付 (現在バージョン)</th>
+                                <th id="ecuNewSoftwareVersion" scope="col">新ソフトバージョン</th>
+                                <th id="ecuNewReleaseDate" scope="col">リリース日付 (新バージョン)</th>
+                                <th id="ecuReprogrammingDate" scope="col">リプロスケジュール</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblECU">
+                            <tr>
+                                <td class="no-vin-specified" colspan="8">VINは見つかりませんでした</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mechanic's Schedule -->
+        <div class="card mt-2">
+            <div id="schedule" class="card-header font-weight-bold">
+                Mechanic's Schedule
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th id="scheduleCreationDate" scope="col">Creation Date</th>
+                                <th id="scheduleWorkflow" scope="col">Workflow to Complete</th>
+                                <th id="scheduleDeadline" scope="col">Deadline</th>
+                                <th id="scheduleResolvedDate" scope="col">Resolved Date</th>
+								<th id="scheduleReassignment" scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblSchedule">
+                            <tr>
+                                <td class="no-vin-specified" colspan="8">VINは見つかりませんでした</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flow links -->
+        <div class="card mt-2">
+            <div class="card-header">
+                <div class="d-flex">
+                    <span id="serviceProcedures" class="me-auto font-weight-bold">デジタル作業手順リンク</span>
+                    <a href="https://dashboard.flow.librestream.com" target="_blank"><i
+                            class="fa fa-tachometer fa-3 text-white large" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th id="serviceProceduresName" scope="col">名称</th>
+                                <th id="serviceProceduresDescription" scope="col">説明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblSP">
+                            <tr>
+                                <td class="no-vin-specified" colspan="2">VINが見つかりませんでした</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+        <script type="text/javascript" src="/subaru/main.js"></script>
+</body>
+
+</html>

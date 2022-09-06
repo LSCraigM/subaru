@@ -1,0 +1,63 @@
+body {
+    /*font-family: 'HelveticaNeueLTW05-65Medium,Helvetica Neue,-apple-system,Open Sans,Arial,sans-serif';*/
+}
+
+img.main-logo {
+    content: url('../images/subaru-logo_80h.png');
+}
+
+.card-header {
+    background-color: #004a8d;
+    color: #dee4f1;
+}
+
+.btn-outline-success,
+.btn-outline-success.disabled {
+    color: #004a8d;
+    border-color: #004a8d;
+    outline-color: #004a8d;
+}
+
+.btn-outline-success:active,
+.btn-outline-success:hover {
+    color: #dee4f1;
+    background-color: #004a8d;
+    border-color: #004a8d;
+    outline-color: #004a8d;
+}
+
+.btn-outline-success:focus,
+.btn-outline-success:active:focus {
+    box-shadow: 0 0 0 0.25rem rgb(222 228 241 / 90%);
+}
+
+.navbar-container {
+    background-color: #ffffff !important;
+}
+
+div.navbar-collapse {
+    margin-top: 1rem!important;
+}
+
+.font-weight-bold {
+    font-weight: 700!important;
+}
+
+.large {
+	font-size: 1.4em;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+
+select.language {
+    font-size: small;
+}
+
+@media (min-width: 992px) {
+    div.navbar-collapse {
+        margin-top: 0rem!important;
+    }
+}
